@@ -216,6 +216,27 @@ class CineSonicViewModel(application: Application) : AndroidViewModel(applicatio
         }
     }
 
+    fun goToPreviousStep() {
+        val state = _uiState.value
+        if (state.project.activePipeline == PipelineType.FILM) {
+            val current = state.project.currentFilmStep
+            val prevOrdinal = current.ordinal - 1
+            if (prevOrdinal >= 0) {
+                val prevStep = FilmStep.values()[prevOrdinal]
+                selectFilmStep(prevStep)
+                _uiState.update { it.copy(userNotification = "ย้อนกลับไปที่: ${prevStep.titleTh}") }
+            }
+        } else {
+            val current = state.project.currentMusicStep
+            val prevOrdinal = current.ordinal - 1
+            if (prevOrdinal >= 0) {
+                val prevStep = MusicStep.values()[prevOrdinal]
+                selectMusicStep(prevStep)
+                _uiState.update { it.copy(userNotification = "ย้อนกลับไปที่: ${prevStep.titleTh}") }
+            }
+        }
+    }
+
     fun applyQuickRefinement(command: String) {
         viewModelScope.launch {
             _uiState.update { it.copy(isGenerating = true) }

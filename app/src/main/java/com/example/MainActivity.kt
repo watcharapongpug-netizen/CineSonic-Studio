@@ -74,13 +74,15 @@ class MainActivity : ComponentActivity() {
                                 onToggleCopilot = { viewModel.toggleCopilot() }
                             )
 
-                            // Pipeline Stepper Navigation
+                            // Pipeline Stepper Navigation (Left to Right flow)
                             PipelineNavigationRow(
                                 activePipeline = uiState.project.activePipeline,
                                 currentFilmStep = uiState.project.currentFilmStep,
                                 currentMusicStep = uiState.project.currentMusicStep,
                                 onSelectFilmStep = { viewModel.selectFilmStep(it) },
-                                onSelectMusicStep = { viewModel.selectMusicStep(it) }
+                                onSelectMusicStep = { viewModel.selectMusicStep(it) },
+                                onPreviousStep = { viewModel.goToPreviousStep() },
+                                onNextStep = { viewModel.approveCurrentStep() }
                             )
 
                             // Main Studio Stage Workspace
@@ -96,6 +98,7 @@ class MainActivity : ComponentActivity() {
                                 musicBrief = uiState.musicBrief,
                                 timelineClips = uiState.timelineClips,
                                 qcChecklist = uiState.qcChecklist,
+                                currentStepContract = uiState.currentStepContract,
                                 isPlaying = uiState.isPlayingTimeline,
                                 timelinePositionMs = uiState.timelinePositionMs,
                                 onIdeaSubmit = { viewModel.initializeDefaultProject(it) },
@@ -104,8 +107,11 @@ class MainActivity : ComponentActivity() {
                                 onTogglePlay = { viewModel.toggleTimelinePlay() },
                                 onSeek = { viewModel.seekTimeline(it) },
                                 onApproveCurrentStep = { viewModel.approveCurrentStep() },
+                                onPreviousStep = { viewModel.goToPreviousStep() },
                                 onOpenExport = { viewModel.openExportModal() },
                                 onOpenShotEdit = { viewModel.openShotEdit(it) },
+                                onSelectProposal = { viewModel.selectProposal(it) },
+                                onQuickRefine = { viewModel.applyQuickRefinement(it) },
                                 modifier = Modifier.weight(1f)
                             )
                         }
