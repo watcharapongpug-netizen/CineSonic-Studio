@@ -1,0 +1,7 @@
+{
+  "name": "CineSonic Studio",
+  "description": "AI Film & Music Production Studio — Generate short films and synchronized soundtracks from a single idea prompt.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
